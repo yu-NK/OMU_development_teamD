@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    image: omu_develop_teamd_image
+    container_name: omu_develop_teamd_container
+    ports:
+      - "8080:80"
