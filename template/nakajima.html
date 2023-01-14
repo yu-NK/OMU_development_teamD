@@ -8,6 +8,13 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <link rel="stylesheet" href="../styles/template.css">
+    <style>
+        img {
+            height:300px;
+            width:auto;
+            margin: 20px;
+        }
+    </style>
 </head>
 
 <!-- 基本的に以下を編集してください。 -->
@@ -29,6 +36,8 @@
             <p>
               歩行分析の分野では、歩行映像から連続した歩行シルエット画像列を抽出し、平均化した画像をGEI(Gait Energy Image)という。GEIを用いるような外見重視の歩行分析は、服装や持ち物の変化によって見た目の変化が生じると、認識精度が低下する。そこで、各歩行シルエットで重心の座標を計算し、歩行シルエット画像列から人物の歩行時の重心の位置の変化を時系列データとして収集する。そして、この時系列データを周波数解析して抽出した特徴量をもとに人物認識を行うことで、服装や持ち物の変化に堅牢な歩行認識の実現を目指す。
             </p>
+            <img class="" src="../images/nakajima_image.png" alt="GEI">
+            <img class="" src="../images/nakajima_graph.png" alt="graph">
             <h2>研究・技術の現状</h2>
             <p>
                 <!-- 箇条書き使用例 -->
