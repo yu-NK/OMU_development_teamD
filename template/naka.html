@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>花の3次元形状推定のためのCT画像を用いた花弁セグメンテーション</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="../styles/template.css">
+</head>
+
+<!-- 基本的に以下を編集してください。 -->
+<!-- 文章はpタグの中、画像やリスト、リンクなどはコピーして適宜使用してください -->
+<!-- レイアウトが崩れる(おそらく画像に関しては元の大きさによってだいぶ崩れたりすると思います)、こういうふうにしたいんだけどどうやるの?などあれば毛利に相談してください -->
+<body>
+    <header class="page-header">
+        <h2 class="logo"><a href="../index.html">TeamD Web</a></h2>
+        <nav class="bg-nav">
+            <ul class="main-nav" id="js-main-nav">
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h1>花の3次元形状推定のためのCT画像を用いた花弁セグメンテーション</h1>
+            <h2>研究の概要</h2>
+            <p>
+                　花は複雑な構造をしていることが多いため、器官と器官の相互作用が花の形態形成に重要になります。花器官の中でも花弁（花びら）は大きさや形、色などが花の種類によって大きく異なることから花器官形成の過程を解明することに適しています。そのため、花弁を中心とした花の形態情報を収集し、花の形態形成の仕組みを明らかにすることが期待されています。
+            </p>
+            <p>
+                　近年では花の形態情報収集の1つとして、CT装置で花を撮影する方法が行われています。そのCTで撮影された花から3次元的な花弁の形態情報を得るためには、CT画像の解析による各花弁の詳細なセグメンテーションが必要となります。しかし、手作業でのセグメンテーションは大変な労力を要します。
+            </p>
+            <img class="" src="../images/ORA-image.png" alt="花のCT画像", width="1000px">
+            <p>
+                　そこで私の研究では、得られた花のCT画像から花弁1枚1枚のセグメンテーションを自動で行う手法の研究を行っています。この研究の問題点として、花のラベル付きデータが少ないことが挙げられ、大量の学習データによる深層学習ベースの手法を用いることが困難です。そのため、教師なし機械学習であるスペクトラルクラスタリングを用いることで、手作業、学習を必要としない自動的な花弁セグメンテーション手法の研究に取り組んでいます。
+            </p>
+
+            <h2>研究・技術の現状</h2>
+            <h3>関連研究</h3>
+            <p>
+                <li><a href="https://takashiijiri.com/papers/ijiri_SIGGRAPH14_takaflower2.pdf">花のCT画像を用いた半自動セグメンテーションシステム<sup>[1]</sup></a></li>
+                    　花のモデリングを目的とした、半自動の花弁セグメンテーションシステム。CTボリュームの断面に対して、ユーザが数カ所指定していくことによる対話型のモデリングシステムです。そのため、手動で行う部分も多いため、時間がかかる問題があります。
+                <li>CT画像のセグメンテーション</li>
+                    　医療分野におけるCT画像を用いたセグメンテーション研究は盛んに行われています。医療CT画像のセグメンテーション研究の手法の多くは、アノテーションされたCT画像のデータセットからCNNを学習する手法が主流となっており、<a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Yang_CPR-GCN_Conditional_Partial-Residual_Graph_Convolutional_Network_in_Automated_Anatomical_Labeling_CVPR_2020_paper.pdf">冠動脈<sup>[2]</sup></a>や<a href="https://openaccess.thecvf.com/content_ICCV_2019/papers/Zhou_Prior-Aware_Neural_Network_for_Partially-Supervised_Multi-Organ_Segmentation_ICCV_2019_paper.pdf">胸部臓器<sup>[3]</sup></a>、</sup></a>や<a href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Cui_ToothNet_Automatic_Tooth_Instance_Segmentation_and_Identification_From_Cone_Beam_CVPR_2019_paper.pdf">歯<sup>[4]</sup></a>などさまざまな人体臓器や組織に対してのセグメンテーションが行われています。
+            </p>
+
+            <h3>研究の現状と課題</h3>
+            <p>
+                　花のCT画像において、花弁が接触している部分というのは画素の輝度値の変化が非常に少ないので、全体を一度にセグメンテーションすることは難しいです。そのため。花弁が接触している部分とそれ以外の部分を分けてセグメンテーションを行っており、現在は接触部分以外のセグメンテーションが可能となっています。花弁同士の接触部分のセグメンテーションが現在の課題です。
+            </p>
+            <img class="" src="../images/ORA-result.png" alt="本研究の結果", width="600px">
+
+            <h2>今後の展望・その研究にどんな夢があるのか</h2>
+            <p>
+                　この研究によって、CT画像の解析の手間が省け、植物学者の負担軽減につながります。また、詳細なセグメンテーションにより今まで発見できなかった形態情報が得られる可能性もあります。
+            </p>
+
+            <h2>補足（スペクトラルクラスタリング）</h2>
+            <p>
+                　スペクトラルクラスタリングはグラフ構造をしたデータから、リンクが密になっている連結部分グラフを1つのクラスタとし、リンクがない、もしくは疎な部分を別のクラスタとしてグラフを分割することでクラスタ分割を行うクラスタリング手法です。
+            </p>
+            <p>
+                　本研究では花のCT画像の前景画素をノードとして扱い、それらの前景画素の類似度を計算し類似度行列を作成します。この類似度行列から正規化ラプラシアン行列を計算し、この行列の最小固有値からクラスタ数k個分の固有値に対応する固有ベクトルを計算します。これで得られた固有ベクトルを特徴量とし、k-means法によりk個のクラスタにクラスタリングを行います。
+            </p>
+            <p>
+                　スペクトラルクラスタリングについては、以下のサイトが参考になります。
+            </p>
+            <p>
+                <li><a href="https://techblog.nhn-techorus.com/archives/5464">スペクトラルクラスタリング入門 | NHN テコラス Tech Blog</a></li>
+                <li><a href="https://mr-r-i-c-e.hatenadiary.org/entry/20121214/1355499195">スペクトラルクラスタリングの話 | おいしいお米の話</a></li>
+            </p>
+
+            <h2>参考文献</h2>
+            <ol>
+                <li>Takashi Ijiri, Shin Yoshizawa, Hideo Yokota, and Takeo Igarashi. Flower Modeling via X-ray Computed Tomography. ACM Transactions on Graphics (TOG), Vol. 33, pp. 1 – 10, 2014.</li>
+                <li>Han Yang, Xingjian Zhen, Ying Chi, Lei Zhang, and Xian-Sheng Hua. CPR-GCN: Conditional Partial-Residual Graph Convolutional Network in Automated Anatomical Labeling of Coronary Arteries. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 3803–3811, 2020.</li>
+                <li>Yuyin Zhou, Zhe Li, Song Bai, Chong Wang, Xinlei Chen, Mei Han, Elliot Fishman, and Alan L. Yuille. Prior-aware neural network for partially-supervised multi-organ segmentation. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), pp. 10672–10681, 2019.</li>
+                <li>Zhiming Cui, Changjian Li, and Wenping Wang. Toothnet: Automatic Tooth Instance Segmentation and Identification From Cone Beam CT Images. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 6368–6377, 2019.</li>
+            </ol>
+            <h2>関連サイト</h2>
+            <p>
+                <li><a href="https://imlab.jp/">大阪公立大学 大学院情報学研究科 基幹情報学専攻 知能情報学分野 知能メディア処理研究室</a></li>
+            </p>
+        </article>
+    </main>
+    <footer>
+        <div>
+            <p>TeamD Web</p>
+            <p>&copy; 2022, TeamD</p>
+        </div>
+    </footer>
+</body>
+</html>
