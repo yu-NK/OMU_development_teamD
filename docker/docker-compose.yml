@@ -6,4 +6,5 @@ services:
     image: omu_develop_teamd_image
     container_name: omu_develop_teamd_container
     ports:
-      - "8080:80"
+      - "9000:80"
+    command: bash -c "sh /etc/startup.sh && httpd-foreground"
